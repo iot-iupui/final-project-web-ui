@@ -1,19 +1,20 @@
 let sendForm = () => {
-    const body = {
-        'phonenumber': document.getElementById("phonenumber").value,
-        'ipAddress': document.getElementById("ipAddress").value,
-        'name': document.getElementById("name").value
-    }
-    console.log(body);
-    //Send Form
-    fetch("http://159.203.108.254:3000/laundry/new", {
+    const options = {
         method: 'POST',
-        body: body,
+        body: {
+            'phonenumber': document.getElementById("phonenumber").value,
+            'laundryIp': document.getElementById("ipAddress").value,
+            'name': document.getElementById("name").value
+        },
         headers: new Headers({
-            ContentType: "application/json"
-        })
-    }).then((res) => {
-        console.log(res.body);
+            'Content-Type': "application/json"
+        }),
+        mode: 'cors'
+    };
+    console.dir(options);
+    //Send Form
+    fetch("http://159.203.108.254:3000/laundry/new", options).then((res) => {
+        console.dir(res);
     }).catch((err) => {
         console.log(err);
     });
